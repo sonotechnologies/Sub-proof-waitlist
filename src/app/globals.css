@@ -1,0 +1,95 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/*
+ * Subproof design tokens.
+ * Light, high-contrast UI: navy primary, green / amber / red reserved for
+ * compliance status. Keep status colours out of decoration so they keep
+ * their meaning when the product UI is built on the same tokens.
+ */
+:root {
+  --radius: 0.625rem;
+
+  --background: #ffffff;
+  --foreground: #0b1526;
+
+  --card: #ffffff;
+  --card-foreground: #0b1526;
+
+  /* Navy */
+  --primary: #13294b;
+  --primary-foreground: #ffffff;
+  --primary-soft: #e8edf5;
+
+  --secondary: #eef1f6;
+  --secondary-foreground: #13294b;
+
+  --muted: #f4f6f9;
+  --muted-foreground: #4a5568;
+
+  --border: #d5dbe4;
+  --input: #b9c2cf;
+  --ring: #1f4ba0;
+
+  /* Status */
+  --success: #15703d;
+  --success-soft: #e3f5ea;
+  --warning: #9a5a00;
+  --warning-soft: #fdf1d8;
+  --danger: #b42318;
+  --danger-soft: #fde8e6;
+  --destructive: #b42318;
+}
+
+@theme inline {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-soft: var(--primary-soft);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+  --color-warning: var(--warning);
+  --color-warning-soft: var(--warning-soft);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-destructive: var(--destructive);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "cv11", "ss01";
+  }
+  ::selection {
+    background: var(--primary-soft);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
