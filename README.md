@@ -58,10 +58,15 @@ Schema changes: edit `src/db/schema.ts`, run `npm run db:generate`, commit the g
 
 1. Import the repo in Vercel. Vercel detects the framework from `vercel.json`.
 2. Add a database: either use the **Neon** integration from the Vercel Marketplace (it sets `DATABASE_URL`), or paste your own Neon connection string.
-3. Add `ADMIN_PASSWORD`. You can also set `NEXT_PUBLIC_SITE_URL` (your custom domain) and `NEXT_PUBLIC_CONTACT_EMAIL`.
+3. Add `ADMIN_PASSWORD`. This and `DATABASE_URL` are the only variables you enter in Vercel.
 4. Run the migration once against the production database: `DATABASE_URL=… npm run db:migrate`.
 
-When `NEXT_PUBLIC_SITE_URL` isn't set, canonical/OG URLs fall back to Vercel's production domain (`VERCEL_PROJECT_PRODUCTION_URL`).
+Public, non-secret settings live in the committed `.env.production`, which Next.js reads at build time, so Vercel picks them up with no dashboard setup:
+
+- `NEXT_PUBLIC_CONTACT_EMAIL`: the footer contact address.
+- `NEXT_PUBLIC_SITE_URL`: left unset, so canonical/OG URLs use Vercel's production domain (`VERCEL_PROJECT_PRODUCTION_URL`). Set it there when you add a custom domain.
+
+A value set in the Vercel dashboard overrides `.env.production`. Never put secrets in `.env.production`.
 
 ## Project layout
 
